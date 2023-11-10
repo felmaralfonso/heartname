@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-  
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>What is this for?</title>
+  <title>Beautiful Name Art</title>
   <style>
     body {
       display: flex;
@@ -12,43 +12,46 @@
       align-items: center;
       justify-content: center;
       min-height: 100vh;
-      margin: 0;  
-      background-color: #f4f4f4;
-      font-family: 'Arial', sans-serif;
+      margin: 0;
+      background-color: #f0f0f0; /* Light gray background */
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #333; /* Dark text color */
     }
 
     header {
       text-align: center;
       padding: 20px;
-      background-color: #0F4392;
-      color: #fff;
+      background-color: #3498db; /* Blue header background */
+      color: #fff; /* White text color */
       font-size: 1.5rem;
       font-weight: bold;
       text-transform: uppercase;
       width: 100%;
-      position: fixed; /* Set position to fixed */
-      top: 0; /* Place at the top */
-      min-height: 0vh;
+      position: fixed;
+      top: 0;
+      z-index: 1000; /* Higher z-index to ensure it's above other elements */
     }
 
     .art-container {
       position: relative;
       text-align: center;
-      margin-bottom: 100px;
-      margin-top: 70px; /* Adjusted margin to make space for the fixed header */
+      margin-top: 70px;
+      margin-bottom: 120px;
     }
 
     .name {
       font-size: 3rem;
       font-weight: bold;
-      color: #0F4392;
+      color: #3498db; /* Blue text color */
       text-transform: uppercase;
       cursor: pointer;
-      transition: color 0.2s ease-in-out 0.1s;
+      transition: color 0.3s ease-in-out;
+      position: relative;
+      display: inline-block;
     }
 
     .name:hover {
-      color: #000249;
+      color: #1f618d; /* Darker blue on hover */
     }
 
     .name::before {
@@ -59,30 +62,35 @@
       left: 50%;
       transform: translate(-50%, -50%) scale(0);
       transform-origin: center;
-      color: #FF4949;
+      color: #e74c3c; /* Red heart color */
       z-index: -1;
-      transition: transform 0.5s ease-in-out, background-position 0.5s ease-in-out, color 0.5s ease-in-out;
+      transition: transform 0.5s ease-in-out;
     }
 
     .name:hover::before {
       transform: translate(-50%, -50%) scale(4);
-      background-position: 0 0;
-      color: #DD1717;
     }
 
     #inputField {
       margin-top: 20px;
       padding: 10px;
       font-size: 1rem;
-      border: 2px solid #000000;
+      border: 2px solid #3498db; /* Blue border color */
       border-radius: 5px;
+      transition: border-color 0.3s ease-in-out;
     }
 
     #inputField::placeholder {
-      color: #000000;
+      color: #555; /* Placeholder text color */
+    }
+
+    #inputField:focus {
+      outline: none;
+      border-color: #1f618d; /* Darker blue when focused */
     }
   </style>
 </head>
+
 <body>
   <header>
     Type a name and hover the cursor over or click the text
@@ -91,46 +99,14 @@
   <div class="art-container">
     <div class="name" id="name"> </div>
   </div>
-  
+
   <input type="text" id="inputField" placeholder="Enter a name" oninput="updateName(this.value)">
-  
+
   <script>
     function updateName(newName) {
-  document.getElementById('name').textContent = newName;
-
-  // Get a reference to the Firebase Realtime Database
-  const database = firebase.database();
-  
-  // Push the new name to the 'names' node
-  database.ref('names').push({
-    name: newName
-  });
-}
+      document.getElementById('name').textContent = newName;
+    }
   </script>
-  <!-- Firebase App (the core Firebase SDK) -->
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-
-<!-- Firebase Realtime Database -->
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
-
-<script>
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-  apiKey: "AIzaSyBWLjBv6VbWLbVreHk3qJJk7ZK4VT1eC20",
-  authDomain: "heartname-55ebb.firebaseapp.com",
-  projectId: "heartname-55ebb",
-  storageBucket: "heartname-55ebb.appspot.com",
-  messagingSenderId: "867722982115",
-  appId: "1:867722982115:web:821aa9ae29f38e164e0bd6",
-  measurementId: "G-M9NCRXZ06N"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-</script>
-
 </body>
+
 </html>
