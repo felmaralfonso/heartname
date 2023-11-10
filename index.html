@@ -96,8 +96,16 @@
   
   <script>
     function updateName(newName) {
-      document.getElementById('name').textContent = newName;
-    }
+  document.getElementById('name').textContent = newName;
+
+  // Get a reference to the Firebase Realtime Database
+  const database = firebase.database();
+  
+  // Push the new name to the 'names' node
+  database.ref('names').push({
+    name: newName
+  });
+}
   </script>
   <!-- Firebase App (the core Firebase SDK) -->
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
