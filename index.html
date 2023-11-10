@@ -45,21 +45,23 @@
       text-transform: uppercase;
       cursor: pointer;
       transition: color 0.2s ease-in-out 0.1s;
+      -webkit-text-stroke-width: 3px;
+  -webkit-text-stroke-color: black;
     }
 
     .name:hover {
-      color: #000249;
+      color: #ffffff;
     }
 
     .name::before {
-      content: '❤';
+      content: '▦';
       font-size: 5rem;
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%) scale(0);
       transform-origin: center;
-      color: #FF4949;
+      color: #192734;
       z-index: -1;
       transition: transform 0.5s ease-in-out, background-position 0.5s ease-in-out, color 0.5s ease-in-out;
     }
@@ -67,7 +69,145 @@
     .name:hover::before {
       transform: translate(-50%, -50%) scale(4);
       background-position: 0 0;
-      color: #DD1717;
+      color: #192734;
+    }
+
+    #inputField {
+      margin-top: 20px;
+      padding: 10px;
+      font-size: 1rem;
+      border: 2px solid #000000;
+      border-radius: 5px;
+    }
+
+    #inputField::placeholder {
+      color: #000000;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    Type a name and hover the cursor over or click the text
+  </header>
+
+  <div class="art-container">
+    <div class="name" id="name"> </div>
+  </div>
+  
+  <input type="text" id="inputField" placeholder="Enter a name" oninput="updateName(this.value)">
+  
+  <script>
+    function updateName(newName) {
+  document.getElementById('name').textContent = newName;
+
+  // Get a reference to the Firebase Realtime Database
+  const database = firebase.database();
+  
+  // Push the new name to the 'names' node
+  database.ref('names').push({
+    name: newName
+  });
+}
+  </script>
+  <!-- Firebase App (the core Firebase SDK) -->
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+
+<!-- Firebase Realtime Database -->
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+  apiKey: "AIzaSyBWLjBv6VbWLbVreHk3qJJk7ZK4VT1eC20",
+  authDomain: "heartname-55ebb.firebaseapp.com",
+  projectId: "heartname-55ebb",
+  storageBucket: "heartname-55ebb.appspot.com",
+  messagingSenderId: "867722982115",
+  appId: "1:867722982115:web:821aa9ae29f38e164e0bd6",
+  measurementId: "G-M9NCRXZ06N"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+</script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+  
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What is this for?</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;  
+      background-color: #f4f4f4;
+      font-family: 'Arial', sans-serif;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px;
+      background-color: #0F4392;
+      color: #fff;
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      width: 100%;
+      position: fixed; /* Set position to fixed */
+      top: 0; /* Place at the top */
+      min-height: 0vh;
+    }
+
+    .art-container {
+      position: relative;
+      text-align: center;
+      margin-bottom: 100px;
+      margin-top: 70px; /* Adjusted margin to make space for the fixed header */
+    }
+
+    .name {
+      font-size: 3rem;
+      font-weight: bold;
+      color: #0F4392;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: color 0.2s ease-in-out 0.1s;
+      -webkit-text-stroke-width: 3px;
+  -webkit-text-stroke-color: black;
+    }
+
+    .name:hover {
+      color: #ffffff;
+    }
+
+    .name::before {
+      content: '▦';
+      font-size: 5rem;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      transform-origin: center;
+      color: #192734;
+      z-index: -1;
+      transition: transform 0.5s ease-in-out, background-position 0.5s ease-in-out, color 0.5s ease-in-out;
+    }
+
+    .name:hover::before {
+      transform: translate(-50%, -50%) scale(4);
+      background-position: 0 0;
+      color: #192734;
     }
 
     #inputField {
